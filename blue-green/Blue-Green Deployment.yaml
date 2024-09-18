@@ -1,0 +1,78 @@
+# deploiement blue
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+      env: blue
+  template:
+    metadata:
+      labels:
+        app: myapp
+        env: blue
+    spec:
+      containers:
+      - name: myapp
+        image: nginx
+
+# service du deploiement blue
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blue
+  namespace: default
+spec:
+  selector:
+    app: myapp
+    env: blue
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+
+    # deploiement vert
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: green
+  namespace: default
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: myapp
+      env: green
+  template:
+    metadata:
+      labels:
+        app: myapp
+        env: green
+    spec:
+      containers:
+      - name: myapp
+        image: redis
+
+
+# service du deploiement vert
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: green
+  namespace: default
+spec:
+  selector:
+    app: myapp
+    env: green
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80

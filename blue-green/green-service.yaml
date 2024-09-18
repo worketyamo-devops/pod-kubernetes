@@ -1,0 +1,15 @@
+# service du deploiement vert
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: green
+  namespace: default
+spec:
+  selector:
+    app: myapp
+    env: green
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
