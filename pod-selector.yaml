@@ -1,0 +1,59 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-A
+  labels:
+    app: web
+    env: dev
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+
+
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-B
+  labels:
+    app: web
+    env: production
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-C
+  labels:
+    app: api
+    env: dev
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-D
+  labels:
+    app: api
+    env: production
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+
+
+    Pod A : app=web, env=dev
+■ Pod B : app=web, env=production
+■ Pod C : app=api, env=dev
+■ Pod D : app=api, env=production
