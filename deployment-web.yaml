@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-label
+  labels:
+    app: production
+    dev: web
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      dev: web
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+    type: RollingUpdate
+
+
+  template:
+    metadata:
+      name: yann
+      labels:
+        app: production
+        dev: web
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.17

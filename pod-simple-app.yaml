@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-web-pod
+  labels:
+    app: web
+    env: dev
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest

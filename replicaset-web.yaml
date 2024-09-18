@@ -1,0 +1,23 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-label
+  labels:
+    app: production
+    dev: web
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      dev: web
+  template:
+    metadata:
+      labels:
+        app: production
+        dev: web
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
